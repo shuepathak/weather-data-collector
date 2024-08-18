@@ -3,13 +3,15 @@
 
 The Weather Data Collector is a serverless application built on AWS that automatically fetches, processes, and stores weather data. It utilizes AWS Lambda for computation,retrieves data from a public weather API, stores raw data in Amazon S3, and saves processed data in an Amazon RDS PostgreSQL database.\
 
-## Architecture\
+## Architecture
 
 The project uses the following AWS services:
 1. AWS Lambda
 2. Amazon S3
 3. Amazon RDS (PostgreSQL)
 4. Amazon CloudWatch Events (for scheduling)
+
+5. Thanks to https://openweathermap.org/ they provide api keys that can be used for your individual projects. 
 
 ## Components
 
