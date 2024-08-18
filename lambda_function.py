@@ -8,20 +8,20 @@ from datetime import datetime
 def lambda_handler(event, context):
     # API key from environment variable
     api_key = os.environ['WEATHER_API_KEY']
-    city = "London"
+    city = "Bristol"
     
-    # Get weather data
+    # Let's Get weather data
     url = f"http://api.openweathermap.org/data/2.5/weather?q=\{city\}&appid=\{api_key\}&units=standard"
     response = requests.get(url)
     data = response.json()
     
-    # Extract relevant information 
+    # Now Extract relevant information 
     timestamp = datetime.now().isoformat()
     temperature = data['main']['temp']
     humidity = data['main']['humidity']
     description = data['weather'][0]['description']
     
-    # Store raw data in S3
+    # Now Here we Store raw data in S3
     s3 = boto3.client('s3')
     bucket_name = os.environ['S3_BUCKET_NAME']
     s3.put_object(
@@ -30,7 +30,7 @@ def lambda_handler(event, context):
         Body=json.dumps(data)
     )
     
-    # Store processed data in RDS
+    # Lastly we Store processed data in RDS
     conn = psycopg2.connect(
         host=os.environ['DB_HOST'],
         database=os.environ['DB_NAME'],
